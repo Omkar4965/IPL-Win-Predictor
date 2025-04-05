@@ -44,19 +44,33 @@ with col5:
     wickets = st.number_input('Wicket_out')
 
 if st.button('Predict Probability'):
-    runs_left = target - score
-    balls_left = 120 - overs*6
-    wickets_left = 10-wickets
-    crr = score/overs
-    rrr = runs_left*6/balls_left
 
-    input_df = pd.DataFrame({'batting_team': [batting_team], 'bowling_team': [bolling_team],
-                             'city': [selected_city], 'runs_left': [runs_left], 'balls_left': [balls_left],
-                             'wickets': [wickets_left], 'total_runs_x': [target], 'crr': [crr], 'rrr': [rrr]})
+    if batting_team == bolling_team:
+        st.error("Select 2 different teams")
+    elif overs == 0:
+        st.error("Overs must be greater than 0")
+    else:
+        runs_left = target - score
+        balls_left = 120 - overs * 6
+        wickets_left = 10 - wickets
+        crr = score / overs
+        rrr = (runs_left * 6) / balls_left if balls_left != 0 else 0
 
-    result = pipe.predict_proba(input_df)
-    loss = result[0][0]
-    win = result[0][1]
+        input_df = pd.DataFrame({
+            'batting_team': [batting_team],
+            'bowling_team': [bolling_team],
+            'city': [selected_city],
+            'runs_left': [runs_left],
+            'balls_left': [balls_left],
+            'wickets': [wickets_left],
+            'total_runs_x': [target],
+            'crr': [crr],
+            'rrr': [rrr]
+        })
 
-    st.header(batting_team + '- ' + str(round(win*100)) + '%')
-    st.header(bolling_team + '- ' + str(round(loss*100)) + '%')
+        result = pipe.predict_proba(input_df)
+        loss = result[0][0]
+        win = result[0][1]
+
+        st.header(batting_team + ' - ' + str(round(win * 100)) + '%')
+        st.header(bolling_team + ' - ' + str(round(loss * 100)) + '%')
