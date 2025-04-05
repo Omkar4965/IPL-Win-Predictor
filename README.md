@@ -10,8 +10,8 @@ This project helps cricket fans and analysts get a real-time prediction of a tea
 
 👉 [Try it here](https://ipl-win-predictor-omkxr.onrender.com/)
 
-![IPL Win Predictor](![image](https://github.com/user-attachments/assets/eb5497b4-e5a2-4890-87bf-5ad48dd554fc)
-)
+![image](https://github.com/user-attachments/assets/d9a88e16-070b-4da5-ba71-a8d1c77551ed)
+
 
 ---
 
